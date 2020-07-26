@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
+import { marker } from '../models/marker';
 
 @Component({
   selector: 'app-home',
@@ -7,24 +8,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  lat: number = 51.673858;
-  lng: number = 7.815982;
+  canMark  = true;
+  lat: number = 19.8563;
+  lng: number = 102.4955;
 
   markers: marker[] = [
 	  {
-		  lat: 51.673858,
-		  lng: 7.815982,
-		  label: 'A'
-	  },
-	  {
-		  lat: 51.373858,
-		  lng: 7.215982,
-		  label: 'B',
-	  },
-	  {
-		  lat: 51.723858,
-		  lng: 7.895982,
-		  label: 'C',
+		  lat: 19.8563,
+		  lng: 102.4955,
+      label: '',
+      draggable: true
 	  }
   ]
 
@@ -32,25 +25,27 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
   }
+
   clickedMarker(label: string, index: number) {
     console.log(`clicked the marker: ${label || index}`)
   }
-      
-  mapClicked($event) {
+
+  mapClicked($event ) {
+    if ( !this.canMark )
+      return;
     this.markers.push({
       lat: $event.coords.lat,
-      lng: $event.coords.lng
+      lng: $event.coords.lng,
+      draggable: true
     });
 
   }
 
+  markerDragEnd(m: marker, $event: MouseEvent) {
+    console.log('dragEnd', m, $event);
+  }
+
 
 }
 
 
-// just an interface for type safety.
-interface marker {
-	lat: number;
-	lng: number;
-	label?: string;
-}
