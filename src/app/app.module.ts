@@ -3,20 +3,23 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { HomeComponent } from './core/home/home.component';
+import { HeaderComponent } from './core/header/header.component';
 
-import { AngularFireModule } from '@angular/fire';
-import { AngularFireDatabaseModule } from '@angular/fire/database';
-import { environment } from '../environments/environment';
+import { AgmCoreModule } from '@agm/core';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    HomeComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    AngularFireModule.initializeApp(environment.firebaseConfig),
-    AngularFireDatabaseModule    
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyCKIP1XytWqCKJhtcHJmnusm19wnvUo97I'
+    })
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,0 +1,18 @@
+<div class="container">
+    <h1 class="text-success">Google Map</h1>
+</div>
+
+<agm-map [latitude]="lat" [longitude]="lng" [zoom]="15" (mapClick)="mapClicked($event)">
+    <agm-marker *ngFor="let m of markers; let i = index" [latitude]="m.lat" [longitude]="m.lng" [label]="m.label"
+    (markerClick)="clickedMarker(m.label, i)">
+        <agm-info-window>
+            <strong>InfoWindow content</strong>
+        </agm-info-window>
+    </agm-marker>
+    <agm-circle [latitude]="lat + 0.3" [longitude]="lng" 
+    [radius]="5000"
+    [fillColor]="'red'"
+    [circleDraggable]="true"
+    [editable]="true">
+    </agm-circle>    
+</agm-map>
